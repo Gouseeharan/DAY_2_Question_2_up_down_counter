@@ -1,0 +1,23 @@
+module count( input reset, clk, enable , up_down , [3:0]limit, output reg [3:0]count);
+always @(posedge clk) begin
+
+if ( reset )
+count <= 4'b0000;
+
+else if ( enable == 0)
+count <= count;
+
+else if ( enable == 1 && up_down == 1 )
+if (count != limit )
+count <= count + 1;
+else
+count <= 4'b0000;
+
+else if ( enable == 1 && up_down ==  0)
+if (count == 0 )
+count <= limit;
+else
+count <= count -1;
+
+end
+endmodule
